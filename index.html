@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2a2350">
+<title>Santiago con mi papá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f0f8;          /* pétalo de jacarandá, muy claro */
+    --card:#ffffff;
+    --ink:#1c2340;         /* cordillera de noche */
+    --ink-soft:#575d78;
+    --line:#dcd8ea;
+    --jac:#6e4fc2;         /* jacarandá */
+    --jac-deep:#3f2d82;
+    --jac-tint:#e8e1fa;
+    --cobre:#c96f1e;       /* cobre chileno */
+    --cobre-tint:#fbe9d8;
+    --nieve:#eaf1f8;
+    --ok:#2f8a5b;
+    --ok-tint:#dff1e6;
+    --hero-1:#2a2350;
+    --hero-2:#46357f;
+    --r-lg:22px;
+    --r-md:14px;
+    --r-sm:5px;
+    --nav-h:64px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14172a; --card:#1e2238; --ink:#ecebf6; --ink-soft:#a6a9c4; --line:#33385a;
+      --jac:#a58cf0; --jac-deep:#c9b9ff; --jac-tint:#2d2756; --cobre:#f0a35c; --cobre-tint:#3b2a1c;
+      --nieve:#1b2540; --ok:#6fcf98; --ok-tint:#1d3a2b; --hero-1:#110f24; --hero-2:#2b2160;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14172a; --card:#1e2238; --ink:#ecebf6; --ink-soft:#a6a9c4; --line:#33385a;
+    --jac:#a58cf0; --jac-deep:#c9b9ff; --jac-tint:#2d2756; --cobre:#f0a35c; --cobre-tint:#3b2a1c;
+    --nieve:#1b2540; --ok:#6fcf98; --ok-tint:#1d3a2b; --hero-1:#110f24; --hero-2:#2b2160;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Schibsted Grotesk', system-ui, sans-serif;
+    font-size:16.5px; line-height:1.55;
+    padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));
+  }
+  @media (min-width:900px){ body{padding-bottom:0;} }
+  h1,h2,h3,h4{margin:0; line-height:1.15; font-weight:800; letter-spacing:-0.015em;}
+  p{margin:0;}
+  a{color:var(--jac-deep);}
+  button{font:inherit; color:inherit;}
+  :focus-visible{outline:3px solid var(--cobre); outline-offset:2px; border-radius:4px;}
+  .wrap{max-width:780px; margin:0 auto; padding:0 16px;}
+  @media (min-width:600px){ .wrap{padding:0 24px;} }
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);}
+
+  /* ---------- TOP BAR (escritorio) ---------- */
+  .topbar{
+    display:none; position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  @media (min-width:900px){ .topbar{display:block;} }
+  .topbar-inner{max-width:1080px; margin:0 auto; padding:0 24px; height:58px; display:flex; align-items:center; gap:24px;}
+  .topbar .brand{font-weight:900; text-decoration:none; color:var(--ink); font-size:1.05rem;}
+  .topbar nav{display:flex; gap:4px; margin-left:auto;}
+  .topbar nav a{
+    text-decoration:none; color:var(--ink-soft); font-weight:600; font-size:0.92rem;
+    padding:8px 12px; border-radius:999px;
+  }
+  .topbar nav a:hover{color:var(--ink); background:var(--jac-tint);}
+  .topbar nav a.active{color:var(--jac-deep); background:var(--jac-tint);}
+
+  .icon-btn{
+    border:1px solid var(--line); background:var(--card); border-radius:999px;
+    height:38px; min-width:38px; padding:0 12px; cursor:pointer; font-weight:700; font-size:0.9rem;
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .sos-btn{background:#d6322d; color:#fff; border-color:#d6322d;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(120% 90% at 100% 0%, var(--hero-2) 0%, transparent 60%),
+      var(--hero-1);
+    color:#f4f1ff; padding:28px 0 0; position:relative; overflow:hidden;
+  }
+  .hero-top{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:26px;}
+  .hero-top .dates{font-weight:600; font-size:0.92rem; color:#c9bff0;}
+  .hero-top .tools{display:flex; gap:8px;}
+  .hero .icon-btn{background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); color:#fff;}
+  .hero .sos-btn{background:#d6322d; border-color:#d6322d;}
+  @media (min-width:900px){ .hero .tools .sos-btn{display:none;} }
+  .hero h1{
+    font-size:clamp(2.6rem, 11vw, 4.6rem); font-weight:900; line-height:0.95;
+    letter-spacing:-0.035em; color:#fff; max-width:9ch;
+  }
+  .hero .sub{margin-top:14px; color:#d6d0ee; max-width:46ch; font-size:1.02rem;}
+  .countdown{
+    margin-top:18px; display:inline-flex; align-items:baseline; gap:8px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.16);
+    padding:8px 14px; border-radius:999px; font-weight:600; font-size:0.95rem;
+  }
+  .countdown b{font-size:1.25rem; font-weight:900; color:#ffd2a6;}
+  /* silueta de cordillera */
+  .ridge{display:block; width:100%; height:56px; margin-top:28px;}
+
+  /* ---------- LÍNEA DE DÍAS (estaciones) ---------- */
+  .trip{position:relative;}
+  .line-shell{
+    position:sticky; top:0; z-index:40;
+    background:var(--bg); border-bottom:1px solid var(--line);
+  }
+  @media (min-width:900px){ .line-shell{top:58px;} }
+  .line{
+    max-width:780px; margin:0 auto; padding:10px 8px 8px;
+    display:grid; grid-template-columns:repeat(7, 1fr); position:relative;
+  }
+  .line::before{
+    content:""; position:absolute; left:calc(100%/14 + 8px); right:calc(100%/14 + 8px);
+    top:45px; height:6px; border-radius:3px;
+    background:linear-gradient(90deg, var(--jac) var(--prog,0%), var(--line) var(--prog,0%));
+  }
+  .stop{
+    position:relative; z-index:1; background:none; border:none; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:3px; padding:2px 0 4px;
+    color:var(--ink-soft);
+  }
+  .stop .wd{font-size:0.72rem; font-weight:600; height:16px;}
+  .stop .dot{
+    width:24px; height:24px; border-radius:50%; margin:3px 0 4px;
+    background:var(--card); border:4px solid var(--jac);
+    display:grid; place-items:center; transition:transform .18s ease;
+  }
+  .stop .n{font-weight:800; font-size:1rem; color:var(--ink); line-height:1;}
+  .stop .ic{font-size:0.9rem; line-height:1;}
+  .stop.split-day .dot{border-color:var(--cobre);}
+  .stop.past .dot{background:var(--jac);}
+  .stop[aria-selected="true"] .dot{transform:scale(1.28); background:var(--jac); box-shadow:0 0 0 4px var(--jac-tint);}
+  .stop[aria-selected="true"] .n{color:var(--jac-deep);}
+  .stop.today .wd{color:var(--cobre); font-weight:800;}
+  .stop.today .dot::after{
+    content:""; position:absolute; width:24px; height:24px; border-radius:50%;
+    border:3px solid var(--cobre); animation:ping 1.8s ease-out 3;
+  }
+  @keyframes ping{ from{transform:scale(1); opacity:.9;} to{transform:scale(2.1); opacity:0;} }
+
+  /* ---------- HOY ---------- */
+  .hoy{
+    margin-top:18px; background:var(--card); border-radius:var(--r-lg);
+    border:2px solid var(--jac); padding:18px 18px 16px; position:relative;
+  }
+  .hoy .hoy-label{font-weight:800; color:var(--jac-deep); font-size:0.95rem;}
+  .hoy h2{font-size:1.35rem; margin-top:4px;}
+  .hoy .next{margin-top:12px; padding:12px 14px; border-radius:var(--r-md); background:var(--jac-tint);}
+  .hoy .next small{display:block; color:var(--ink-soft); font-weight:600;}
+  .hoy .next strong{font-size:1.08rem;}
+  .hoy .actions{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .pill{
+    display:inline-flex; align-items:center; gap:6px; text-decoration:none;
+    background:var(--card); border:1px solid var(--line); color:var(--ink);
+    border-radius:999px; padding:7px 13px; font-weight:600; font-size:0.88rem; cursor:pointer;
+  }
+  .pill:hover{border-color:var(--jac);}
+  .pill.solid{background:var(--jac); border-color:var(--jac); color:#fff;}
+  :root[data-theme="dark"] .pill.solid{color:#14172a;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .pill.solid{color:#14172a;} }
+
+  /* ---------- PANEL DEL DÍA ---------- */
+  .day-panel{margin-top:22px; touch-action:pan-y;}
+  .day-head{display:grid; grid-template-columns:auto 1fr; gap:4px 16px; align-items:end;}
+  .day-head .big{font-size:4.2rem; font-weight:900; line-height:0.8; letter-spacing:-0.05em; color:var(--jac); grid-row:span 2;}
+  .day-head .wd{font-weight:700; color:var(--cobre); font-size:0.95rem;}
+  .day-head h2{font-size:clamp(1.35rem, 4.6vw, 1.75rem);}
+  .day-sub{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:14px;}
+  .tag{font-size:0.85rem; font-weight:600; color:var(--ink-soft); background:var(--card); border:1px solid var(--line); padding:3px 10px; border-radius:999px;}
+  .energy{display:flex; align-items:center; gap:8px; font-size:0.85rem; color:var(--ink-soft); font-weight:600; margin-left:auto;}
+  .energy .seg{display:flex; gap:2px;}
+  .energy .seg i{width:7px; height:14px; border-radius:2px; background:var(--line);}
+  .energy .seg i.on{background:var(--cobre);}
+  .day-progress{font-size:0.85rem; color:var(--ink-soft); margin-top:10px; font-weight:600;}
+
+  .legs{list-style:none; margin:18px 0 0; padding:0; position:relative;}
+  .leg{position:relative; display:grid; grid-template-columns:40px 1fr; gap:0 12px; padding-bottom:18px;}
+  .leg::before{content:""; position:absolute; left:19px; top:38px; bottom:0; width:2px; background:var(--line);}
+  .leg:last-child::before{display:none;}
+  .check{
+    width:40px; height:40px; border-radius:50%; border:2px solid var(--line);
+    background:var(--card); cursor:pointer; display:grid; place-items:center;
+    font-size:1.05rem; font-weight:900; color:transparent; transition:background .15s, border-color .15s, color .15s;
+  }
+  .check:hover{border-color:var(--ok);}
+  .leg.done .check{background:var(--ok); border-color:var(--ok); color:#fff;}
+  .leg-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:12px 14px 13px;}
+  .leg.done .leg-card{opacity:0.62;}
+  .leg.done .place{text-decoration:line-through; text-decoration-thickness:2px; text-decoration-color:var(--ok);}
+  .leg.is-next .leg-card{border-color:var(--jac); box-shadow:0 0 0 3px var(--jac-tint);}
+  .leg .time{font-size:0.85rem; font-weight:700; color:var(--jac-deep);}
+  .leg .place{font-size:1.08rem; font-weight:800; margin-top:1px;}
+  .leg .opt{font-size:0.75rem; font-weight:700; color:var(--cobre); background:var(--cobre-tint); padding:1px 8px; border-radius:999px; margin-left:6px; vertical-align:2px; white-space:nowrap;}
+  .leg .meta{display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:6px; font-size:0.87rem; color:var(--ink-soft);}
+  .leg .why{margin-top:8px; font-size:0.93rem; color:var(--ink);}
+  .leg .why a{font-weight:600;}
+  .leg .maps{display:inline-flex; margin-top:10px; font-size:0.85rem; font-weight:700; color:var(--jac-deep); text-decoration:none; gap:5px; align-items:center;}
+  .leg .maps:hover{text-decoration:underline;}
+
+  .who-switch{display:flex; gap:6px; margin-top:18px; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:4px;}
+  .who-switch button{flex:1; border:none; background:none; padding:9px 10px; border-radius:999px; font-weight:700; cursor:pointer; color:var(--ink-soft);}
+  .who-switch button[aria-pressed="true"].her{background:var(--jac); color:#fff;}
+  .who-switch button[aria-pressed="true"].dad{background:var(--cobre); color:#fff;}
+  .who-sub{margin-top:12px; font-weight:700;}
+  .callout{margin-top:6px; background:var(--nieve); border-radius:var(--r-md); padding:13px 15px; font-size:0.92rem;}
+  .callout strong{font-weight:800;}
+
+  .day-pager{display:flex; justify-content:space-between; gap:10px; margin-top:6px;}
+  .day-pager button{flex:1; text-align:left; border:1px solid var(--line); background:var(--card); border-radius:var(--r-md); padding:10px 14px; cursor:pointer;}
+  .day-pager button:last-child{text-align:right;}
+  .day-pager button:disabled{visibility:hidden;}
+  .day-pager small{display:block; color:var(--ink-soft); font-size:0.8rem; font-weight:600;}
+  .day-pager span{font-weight:700; font-size:0.93rem;}
+  .swipe-hint{text-align:center; font-size:0.8rem; color:var(--ink-soft); margin-top:10px;}
+  @media (min-width:900px){ .swipe-hint{display:none;} }
+
+  .anim-next{animation:inR .26s ease;}
+  .anim-prev{animation:inL .26s ease;}
+  @keyframes inR{from{opacity:0; transform:translateX(24px);} to{opacity:1; transform:none;}}
+  @keyframes inL{from{opacity:0; transform:translateX(-24px);} to{opacity:1; transform:none;}}
+
+  /* ---------- SECCIONES ---------- */
+  section{padding:56px 0 8px; scroll-margin-top:96px;}
+  @media (min-width:900px){ section{scroll-margin-top:140px;} }
+  .sec-head{margin-bottom:20px;}
+  .sec-head h2{font-size:clamp(1.7rem, 6vw, 2.2rem); font-weight:900; letter-spacing:-0.03em;}
+  .sec-head p{color:var(--ink-soft); margin-top:6px; max-width:60ch;}
+  h3.sub-h{font-size:1.15rem; margin:30px 0 10px;}
+
+  .grid2{display:grid; grid-template-columns:1fr; gap:12px;}
+  @media (min-width:640px){ .grid2{grid-template-columns:1fr 1fr;} }
+  .box{background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:16px;}
+  .box h4{font-size:1.02rem; margin-bottom:6px;}
+  .box p{font-size:0.93rem; color:var(--ink-soft);}
+  .box .meta{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px; font-weight:700; font-size:0.88rem;}
+  .box.rec{border:2px solid var(--jac);}
+  .badge{display:inline-block; font-size:0.78rem; font-weight:800; padding:2px 9px; border-radius:999px; margin-bottom:8px;}
+  .badge.jac{background:var(--jac-tint); color:var(--jac-deep);}
+  .badge.cob{background:var(--cobre-tint); color:var(--cobre);}
+  .badge.ok{background:var(--ok-tint); color:var(--ok);}
+  .link{font-weight:700; font-size:0.9rem; color:var(--jac-deep); text-decoration:none; display:inline-block; margin-top:12px;}
+  .link:hover{text-decoration:underline;}
+
+  .schematic{background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:12px; overflow-x:auto;}
+  .schematic svg{display:block; width:100%; min-width:620px; height:auto;}
+
+  .route{display:flex; flex-direction:column; gap:8px; margin-top:4px;}
+  .route .step{display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:12px 14px; font-weight:600;}
+  .route .step small{color:var(--ink-soft); font-weight:500; margin-left:auto; white-space:nowrap;}
+
+  .chip{
+    display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:21px; padding:0 6px;
+    border-radius:var(--r-sm); color:#fff; font-weight:800; font-size:0.72rem; margin-right:6px; flex:0 0 auto;
+  }
+  .transit{display:inline-flex; align-items:baseline; flex-wrap:nowrap;}
+  .transit .chip{align-self:center;}
+
+  /* filtros */
+  .filters{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+  .filters button{border:1px solid var(--line); background:var(--card); border-radius:999px; padding:7px 14px; font-weight:600; font-size:0.88rem; cursor:pointer;}
+  .filters button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink);}
+
+  .list{display:flex; flex-direction:column; gap:10px;}
+  .item{background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px;}
+  .item h4{font-size:1.02rem;}
+  .item p{font-size:0.92rem; color:var(--ink-soft); margin-top:4px;}
+  .item .where{font-size:0.85rem; margin-top:8px; color:var(--ink); font-weight:600;}
+  .item .row{display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap;}
+
+  .verdict{border-radius:var(--r-md); padding:14px 16px; font-size:0.93rem; margin-top:10px;}
+  .verdict b{display:block; font-size:1rem; margin-bottom:3px;}
+  .verdict.yes{background:var(--ok-tint);}
+  .verdict.maybe{background:var(--cobre-tint);}
+  .verdict.no{background:var(--nieve);}
+
+  /* útil */
+  .facts{display:grid; grid-template-columns:1fr; gap:10px;}
+  @media (min-width:640px){ .facts{grid-template-columns:1fr 1fr;} }
+  .fact{display:grid; grid-template-columns:36px 1fr; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:var(--r-md); padding:14px;}
+  .fact .e{font-size:1.5rem; line-height:1.2;}
+  .fact h4{font-size:1rem;}
+  .fact p{font-size:0.9rem; color:var(--ink-soft); margin-top:3px;}
+
+  .tools2{display:grid; grid-template-columns:1fr; gap:12px; margin-top:12px;}
+  @media (min-width:700px){ .tools2{grid-template-columns:1fr 1fr;} }
+  .conv label{display:block; font-size:0.85rem; font-weight:700; color:var(--ink-soft); margin-top:10px;}
+  .conv input{
+    width:100%; font:inherit; font-size:1.4rem; font-weight:800; color:var(--ink);
+    background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:8px 12px; margin-top:4px;
+  }
+  .conv input:focus{outline:none; border-color:var(--jac); box-shadow:0 0 0 3px var(--jac-tint);}
+  .conv .rate{font-size:0.82rem; color:var(--ink-soft); margin-top:10px;}
+  .conv .rate input{font-size:0.85rem; font-weight:700; width:70px; padding:2px 6px; display:inline; margin:0 4px;}
+  .quick{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+  .quick button{border:1px solid var(--line); background:var(--bg); border-radius:999px; padding:4px 10px; font-size:0.8rem; font-weight:600; cursor:pointer;}
+
+  .checklist{list-style:none; padding:0; margin:8px 0 0;}
+  .checklist li{border-bottom:1px solid var(--line);}
+  .checklist li:last-child{border-bottom:none;}
+  .checklist label{display:flex; gap:10px; align-items:flex-start; padding:9px 0; cursor:pointer; font-size:0.93rem;}
+  .checklist input{width:20px; height:20px; accent-color:var(--ok); margin-top:2px; flex:0 0 auto;}
+  .checklist input:checked + span{color:var(--ink-soft); text-decoration:line-through;}
+  .cl-count{font-size:0.85rem; color:var(--ink-soft); font-weight:700;}
+
+  table{width:100%; border-collapse:collapse; font-size:0.92rem;}
+  th, td{padding:11px 12px; border-bottom:1px solid var(--line); text-align:left;}
+  th{font-weight:800;}
+  td:not(:first-child), th:not(:first-child){text-align:right;}
+  tr.total td{font-weight:800; border-bottom:none;}
+  .table-wrap{overflow-x:auto; background:var(--card); border:1px solid var(--line); border-radius:var(--r-md);}
+  .table-wrap table{min-width:520px;}
+  .note{font-size:0.85rem; color:var(--ink-soft); margin-top:10px;}
+
+  footer{padding:48px 16px 40px; text-align:center; color:var(--ink-soft); font-size:0.85rem;}
+
+  /* ---------- BOTTOM NAV (móvil) ---------- */
+  .bottom-nav{
+    position:fixed; left:0; right:0; bottom:0; z-index:60;
+    background:var(--card); border-top:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(5,1fr);
+    padding-bottom:env(safe-area-inset-bottom); height:calc(var(--nav-h) + env(safe-area-inset-bottom));
+  }
+  @media (min-width:900px){ .bottom-nav{display:none;} }
+  .bottom-nav a, .bottom-nav button{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+    text-decoration:none; color:var(--ink-soft); font-size:0.72rem; font-weight:700;
+    background:none; border:none; cursor:pointer;
+  }
+  .bottom-nav .e{font-size:1.25rem; line-height:1;}
+  .bottom-nav .active{color:var(--jac-deep);}
+  .bottom-nav .sos{color:#d6322d;}
+
+  /* ---------- SOS (dialog) ---------- */
+  dialog.sheet{
+    border:none; padding:0; width:min(560px, 100%); max-height:88vh;
+    margin:auto auto 0; border-radius:var(--r-lg) var(--r-lg) 0 0;
+    background:var(--card); color:var(--ink);
+  }
+  @media (min-width:640px){ dialog.sheet{margin:auto; border-radius:var(--r-lg);} }
+  dialog.sheet::backdrop{background:rgba(12,10,30,0.55);}
+  dialog.sheet[open]{animation:up .22s ease;}
+  @keyframes up{from{transform:translateY(30px); opacity:0;} to{transform:none; opacity:1;}}
+  .sheet-in{padding:20px 18px 24px;}
+  .sheet-head{display:flex; justify-content:space-between; align-items:center; gap:12px;}
+  .sheet-head h2{font-size:1.4rem;}
+  .sheet .lead{color:var(--ink-soft); font-size:0.92rem; margin-top:4px;}
+  .calls{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:16px;}
+  .calls a{
+    text-decoration:none; text-align:center; border-radius:var(--r-md); padding:12px 6px;
+    background:#fdecea; color:#a3201b; font-weight:700; font-size:0.82rem;
+  }
+  :root[data-theme="dark"] .calls a{background:#3b1d22; color:#ffb4ae;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .calls a{background:#3b1d22; color:#ffb4ae;} }
+  .calls a b{display:block; font-size:1.5rem; font-weight:900;}
+  .sos-block{margin-top:14px; border-top:1px solid var(--line); padding-top:14px;}
+  .sos-block h4{font-size:0.98rem;}
+  .sos-block p{font-size:0.92rem; color:var(--ink-soft); margin-top:3px;}
+  .sos-block .pill{margin-top:8px; margin-right:6px;}
+  .tel-edit{display:flex; gap:6px; margin-top:8px;}
+  .tel-edit input{flex:1; font:inherit; border:1px solid var(--line); border-radius:10px; padding:7px 10px; background:var(--bg); color:var(--ink);}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">Santiago con mi papá</a>
+    <nav id="topNav">
+      <a href="#dias" data-sec="dias">Días</a>
+      <a href="#moverse" data-sec="moverse">Moverse</a>
+      <a href="#extra" data-sec="extra">Si sobra tiempo</a>
+      <a href="#comer" data-sec="comer">Comer y comprar</a>
+      <a href="#util" data-sec="util">Útil</a>
+      <a href="#presupuesto" data-sec="presupuesto">Presupuesto</a>
+    </nav>
+    <button class="icon-btn" data-theme-toggle aria-label="Cambiar tema claro u oscuro">◐</button>
+    <button class="icon-btn sos-btn" data-sos>SOS</button>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="dates">12–18 de octubre de 2026</span>
+      <div class="tools">
+        <button class="icon-btn" data-theme-toggle aria-label="Cambiar tema claro u oscuro">◐</button>
+        <button class="icon-btn sos-btn" data-sos>SOS</button>
+      </div>
+    </div>
+    <h1>Santiago con mi papá</h1>
+    <p class="sub">Seis noches entre cordillera, mercados y un concierto en el Estadio Nacional. Casi todo a pie y en Metro, desde Manquehue.</p>
+    <div class="countdown" id="countdown" aria-live="polite"></div>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 56 L0 40 L90 22 L160 34 L250 8 L330 30 L410 16 L470 26 L560 4 L640 28 L720 14 L800 32 L880 10 L960 30 L1040 18 L1120 34 L1200 20 L1200 56 Z" fill="var(--bg)"/>
+  </svg>
+</div>
+
+<div class="trip" id="dias">
+  <div class="line-shell">
+    <div class="line" id="line" role="tablist" aria-label="Días del viaje"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="hoy" id="hoy"></div>
+    <div class="day-panel" id="dayPanel" role="tabpanel" aria-live="polite"></div>
+    <p class="swipe-hint">Desliza a los lados para cambiar de día · toca el círculo cuando terminen una parada</p>
+  </div>
+</div>
+
+<section class="wrap" id="moverse">
+  <div class="sec-head">
+    <h2>Cómo moverse</h2>
+    <p>Casi toda la semana cuelga de la Línea 1. Del aeropuerto al hotel, del hotel al estadio y cómo pagar el Metro.</p>
+  </div>
+
+  <h3 class="sub-h">✈️ Aeropuerto → hotel</h3>
+  <div class="grid2">
+    <div class="box rec">
+      <span class="badge jac">Recomendado</span>
+      <h4>🚕 Uber, Didi o taxi oficial</h4>
+      <p>Directo a la puerta, sin transbordos. Los conductores de apps a veces esperan en una zona de retiro a unos metros de llegadas. Si prefieren taxi, usen los counters oficiales (Transvip, Transaereo) después de recoger maletas, nunca a alguien que los aborde suelto.</p>
+      <div class="meta"><span>⏱️ 30–35 min</span><span>💰 ~$20.000–25.000 CLP</span></div>
+    </div>
+    <div class="box">
+      <span class="badge cob">Más barato</span>
+      <h4>🚌 Bus + Metro</h4>
+      <p>Centropuerto o TurBus hasta Pajaritos o Los Héroes, y de ahí L1 hasta Manquehue, cruzando la línea de punta a punta. Con equipaje y tras vuelo nocturno, no lo recomendaría para la llegada.</p>
+      <div class="meta"><span>⏱️ 70–90 min</span><span>💰 ~$2.500 CLP + Metro</span></div>
+    </div>
+  </div>
+  <a class="link" href="https://www.google.com/maps/dir/?api=1&origin=Aeropuerto+Internacional+Arturo+Merino+Benitez&destination=Alonso+de+C%C3%B3rdova+6050%2C+Las+Condes&travelmode=driving" target="_blank" rel="noopener">Abrir ruta en Google Maps</a>
+
+  <h3 class="sub-h">🎫 Cómo pagar el Metro</h3>
+  <div class="grid2">
+    <div class="box">
+      <h4>Tarjeta bip!</h4>
+      <p>Se compra y recarga en las boleterías de cualquier estación. Una por persona: el 14 van a andar cada quien por su lado. Los buses rojos (RED) solo aceptan bip!.</p>
+    </div>
+    <div class="box">
+      <h4>Tarifa según la hora</h4>
+      <p>Punta (7:00–8:59 y 18:00–19:59): <b>$895</b>. Valle (9:00–17:59): <b>$815</b>. Bajo (6:00–6:59 y después de 20:45): <b>$735</b>. Desde 2026 también se puede pagar con tarjeta bancaria sin contacto en los torniquetes; confírmenlo en la estación.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-h">🗺️ Las líneas que van a usar</h3>
+  <p class="note" style="margin:0 0 10px;">Esquema para ubicarse rápido, no a escala. En el celular se puede deslizar de lado.</p>
+  <div class="schematic" id="schematic"></div>
+
+  <h3 class="sub-h">🎤 Hotel → Estadio Nacional (14 de octubre)</h3>
+  <div class="route" id="routeStadium"></div>
+  <a class="link" href="https://www.google.com/maps/dir/?api=1&origin=Alonso+de+C%C3%B3rdova+6050%2C+Las+Condes&destination=Estadio+Nacional+de+Chile%2C+%C3%91u%C3%B1oa&travelmode=transit" target="_blank" rel="noopener">Abrir ruta en Google Maps</a>
+  <div class="callout" style="margin-top:12px;">Para el regreso esa noche no confíen en el Metro: la estación Estadio Nacional suele restringirse después de un show de este tamaño. Acuerden antes un punto de Uber o Cabify alejado del tumulto.</div>
+</section>
+
+<section class="wrap" id="extra">
+  <div class="sec-head">
+    <h2>Si sobra tiempo</h2>
+    <p>Lugares que no están en el plan, pero quedan cerca de su ruta. Sirven para un hueco libre, un día de lluvia o cuando el cansancio pide algo corto.</p>
+  </div>
+  <div class="filters" id="extraFilters" role="group" aria-label="Filtrar lugares"></div>
+  <div class="list" id="extraList"></div>
+</section>
+
+<section class="wrap" id="comer">
+  <div class="sec-head">
+    <h2>Qué comer</h2>
+    <p>No tienen horario fijo: es la lista para tener en mente y pedir donde sea que estén ese día.</p>
+  </div>
+  <div class="list" id="foodList"></div>
+
+  <h3 class="sub-h" id="compras">🛍️ Dónde comprar</h3>
+  <p class="note" style="margin:0 0 12px;">Ajustado a lo que de verdad van a comprar: ropa, accesorios y recuerdos.</p>
+  <div class="list" id="shopList"></div>
+  <div class="verdict yes"><b>Aquí sí compraría</b>Patio Outlet La Florida, el único outlet que se resuelve completo en Metro, con descuento real. Y Pueblito Los Dominicos para los recuerdos: está a una estación del hotel y es artesanía de verdad.</div>
+  <div class="verdict maybe"><b>Solo si...</b>quieren marcas premium o tenis de alguna marca específica y no les importa pedir Uber: Arauco Premium Outlet Buenaventura. Si no alcanza el tiempo para los dos outlets, con La Florida basta.</div>
+  <div class="verdict no"><b>No vale la pena una salida aparte</b>Parque Arauco y Costanera Center son precio completo, y ya los van a pisar de pasada el 12 y el 17. Si ven una oferta puntual, aprovéchenla ahí mismo.</div>
+</section>
+
+<section class="wrap" id="util">
+  <div class="sec-head">
+    <h2>Antes de salir y en el camino</h2>
+    <p>Lo práctico que conviene saber viniendo de México.</p>
+  </div>
+  <div class="facts">
+    <div class="fact"><span class="e">🔌</span><div><h4>Enchufes distintos</h4><p>Chile usa tipo C y L a 220 V; México usa A/B. Lleven adaptador. Casi todos los cargadores de celular aguantan 100–240 V, pero revisen la etiqueta antes de conectar una plancha o secadora.</p></div></div>
+    <div class="fact"><span class="e">🧥</span><div><h4>Clima de octubre</h4><p>Primavera: mañanas de ~9 °C y tardes de ~24 °C. Vístanse en capas. El Embalse El Yeso (13 oct) está a ~2.500 m: hace frío, puede haber nieve y el sol pega fuerte. Lleven chamarra, gorro, lentes y bloqueador.</p></div></div>
+    <div class="fact"><span class="e">💵</span><div><h4>Dinero y propina</h4><p>La tarjeta se acepta casi en todos lados. En restaurantes les van a preguntar si agregan la propina sugerida del 10 %. Para cambiar efectivo, las casas de cambio de calle Agustinas, en el centro, suelen dar mejor tasa que el aeropuerto.</p></div></div>
+    <div class="fact"><span class="e">🚰</span><div><h4>Agua de la llave</h4><p>Se puede tomar sin problema. Es dura y de sabor mineral; si les cae pesada al estómago, compren embotellada los primeros días.</p></div></div>
+    <div class="fact"><span class="e">🕗</span><div><h4>Hora y horarios</h4><p>Chile está en horario de verano. Se cena tarde, entre 20:30 y 21:30, y los mercados cierran temprano: almuercen en el Mercado Central antes de las 16:00.</p></div></div>
+    <div class="fact"><span class="e">📱</span><div><h4>Datos en el celular</h4><p>Revisen el roaming de su plan o activen una eSIM antes de volar. La necesitan desde el aeropuerto para pedir el Uber.</p></div></div>
+  </div>
+
+  <div class="tools2">
+    <div class="box conv">
+      <h4>Conversor de pesos</h4>
+      <label for="clp">Pesos chilenos (CLP)</label>
+      <input id="clp" inputmode="numeric" autocomplete="off" value="10.000">
+      <label for="mxn">Pesos mexicanos (MXN)</label>
+      <input id="mxn" inputmode="decimal" autocomplete="off">
+      <div class="quick" id="quick"></div>
+      <p class="rate">Tipo de cambio: 1.000 CLP = <input id="rate" inputmode="decimal" value="18" aria-label="Pesos mexicanos por cada 1.000 pesos chilenos"> MXN. Ajústenlo al de su banco.</p>
+    </div>
+    <div class="box">
+      <div class="row" style="display:flex; justify-content:space-between; align-items:baseline; gap:10px;">
+        <h4>Pendientes</h4><span class="cl-count" id="clCount"></span>
+      </div>
+      <ul class="checklist" id="checklist"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="presupuesto">
+  <div class="sec-head">
+    <h2>Presupuesto</h2>
+    <p>Seis días, sin vuelos ni hotel. Los dos tours y el concierto ya están pagados.</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Rubro</th><th>Por persona (CLP)</th><th>Ambos (CLP)</th><th>Ambos (MXN aprox.)</th></tr></thead>
+    <tbody>
+      <tr><td>Transporte</td><td>$35.000–45.000</td><td>$70.000–90.000</td><td>$1.260–1.620</td></tr>
+      <tr><td>Comida</td><td>$150.000–210.000</td><td>$300.000–420.000</td><td>$5.400–7.560</td></tr>
+      <tr><td>Entradas (incl. Sky Costanera y funicular)</td><td>$40.000–50.000</td><td>$80.000–100.000</td><td>$1.440–1.800</td></tr>
+      <tr class="total"><td>Subtotal sin compras</td><td>$225.000–305.000</td><td>$450.000–610.000</td><td>$8.100–10.980</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Tipo de cambio usado: 1.000 CLP ≈ 18 MXN. Compras: monto abierto.</p>
+</section>
+
+<footer>Santiago de Chile, 12–18 de octubre de 2026 · itinerario para dos</footer>
+
+<nav class="bottom-nav" aria-label="Secciones">
+  <a href="#dias" data-sec="dias"><span class="e">📅</span>Días</a>
+  <a href="#moverse" data-sec="moverse"><span class="e">🚇</span>Moverse</a>
+  <a href="#comer" data-sec="comer"><span class="e">🍽️</span>Comer</a>
+  <a href="#util" data-sec="util"><span class="e">🧳</span>Útil</a>
+  <button class="sos" data-sos><span class="e">🆘</span>SOS</button>
+</nav>
+
+<dialog class="sheet" id="sos" aria-labelledby="sosTitle">
+  <div class="sheet-in">
+    <div class="sheet-head">
+      <h2 id="sosTitle">Si andan separados</h2>
+      <button class="icon-btn" data-close aria-label="Cerrar">✕</button>
+    </div>
+    <p class="lead">Lo esencial para que cualquiera de los dos lo resuelva solo. Toca un número para llamar.</p>
+    <div class="calls">
+      <a href="tel:133"><b>133</b>Carabineros</a>
+      <a href="tel:131"><b>131</b>Ambulancia</a>
+      <a href="tel:132"><b>132</b>Bomberos</a>
+    </div>
+    <div class="sos-block">
+      <h4>🏨 Hotel: ICON Hotel, Las Condes</h4>
+      <p>Alonso de Córdova 6050. A 2 minutos de Metro Manquehue (L1).</p>
+      <div id="telArea"></div>
+      <a class="pill" href="https://www.google.com/maps/search/?api=1&query=ICON+Hotel+Las+Condes+Alonso+de+C%C3%B3rdova+6050+Santiago" target="_blank" rel="noopener">📍 Abrir en Maps</a>
+    </div>
+    <div class="sos-block">
+      <h4>📍 Punto de encuentro</h4>
+      <p>Metro Manquehue, salida principal. Es la estación que van a usar casi todos los días.</p>
+    </div>
+    <div class="sos-block">
+      <h4>🇲🇽 Embajada de México</h4>
+      <p>Félix de Amesti 128, Las Condes. Sección consular de lunes a viernes, 9:00–13:00, con cita.</p>
+      <a class="pill" href="tel:+56225838400">📞 Conmutador</a>
+      <a class="pill" href="tel:+56996823061">🚨 Emergencias consulares</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+// ---------- almacenamiento seguro (puede fallar en modo privado) ----------
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+// un solo lugar para los colores de línea: chips, rutas y mapa esquemático
+const LINE_COLORS = { L1:'#d6322d', L4:'#2b5fb8', L5:'#2f8a5b', L6:'#8a4fc2' };
+function chip(line, text){
+  return `<span class="transit"><span class="chip" style="background:${LINE_COLORS[line]}">${line}</span><span>${text}</span></span>`;
+}
+const maps = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q + ', Santiago, Chile')}`;
+
+const days = [
+  {
+    id:'d12', num:12, wd:'Lunes', wdNote:'feriado', title:'Llegada y aclimatación', energy:3, icon:'😴',
+    tags:['Descanso','Padre-hija'],
+    legs:[
+      {time:'06:55', place:'Aeropuerto → hotel', meta:['🚕 Taxi o app, ~30–35 min','💰 ~$20.000–25.000 CLP'], why:'Llegan de vuelo nocturno; con maletas no vale la pena el Metro. El 12 es feriado: el Metro abre a las 07:30.', q:'ICON Hotel Alonso de Córdova 6050 Las Condes'},
+      {time:'Media mañana', place:'Dejar maletas y desayunar tranquilos', meta:['📍 Apumanque o un café de Nueva Las Condes'], why:'El check-in es a las 15:00; el hotel guarda el equipaje mientras tanto.', q:'Apumanque'},
+      {time:'Mediodía', place:'Parque Arauco y Parque Araucano', meta:['🚶 10–12 min a pie','⏱️ 1.5–2 h'], why:'Mall y parque contiguo para caminar sin exigirse después del vuelo.', q:'Parque Araucano'},
+      {time:'Primera tarde', place:'Pueblito Los Dominicos', meta:[chip('L1','Manquehue → Los Dominicos, 1 estación'),'⏱️ 1–1.5 h'], why:'El mercado artesanal clásico: lapislázuli, lana, cobre, cerámica. Aquí sí conviene comprar recuerdos.', q:'Pueblito Los Dominicos'},
+      {time:'15:00', place:'Check-in y siesta corta', meta:[], why:'Mañana el tour pasa por ustedes a las 5:30.'},
+      {time:'Noche', place:'Cena cerca del hotel y a dormir temprano', meta:[], why:'Dejen lista la ropa de abrigo para la montaña.'}
+    ]
+  },
+  {
+    id:'d13', num:13, wd:'Martes', title:'Cajón del Maipo y Embalse El Yeso', energy:8, icon:'⛰️',
+    tags:['Montaña','Tour pagado'],
+    legs:[
+      {time:'05:30', place:'Pickup del tour “Vista al Cajón del Maipo, Embalse del Yeso con brindis”', meta:['💰 ya pagado','🧥 capas, gorro, bloqueador, lentes'], why:'Día de cordillera y altura (~2.500 m). Coman algo antes de salir y tomen agua durante el día; el regreso es entre 17:00 y 19:00.'},
+      {time:'Noche', place:'Cena simple cerca del hotel', meta:[], why:'Si llegan muy cansados, pidan delivery.'}
+    ]
+  },
+  {
+    id:'d14', num:14, wd:'Miércoles', title:'Cada quien su plan', energy:6, icon:'🎤', split:true,
+    tags:['Concierto','Centro histórico'],
+    her:{
+      label:'👩 Hija', sub:'Concierto de BTS en el Estadio Nacional',
+      legs:[
+        {time:'09:00–13:00', place:'Mañana tranquila juntos', meta:['guarden energía para la noche'], why:''},
+        {time:'13:30', place:'Almuerzo fuerte cerca del hotel', meta:[], why:'Cerca del estadio todo va a estar saturado y caro.'},
+        {time:'14:30–15:00', place:'Salida al Estadio Nacional', meta:[chip('L1','Manquehue → Los Leones'), chip('L6','→ Estadio Nacional')], why:'Con ~200.000 entradas en las tres fechas, el ingreso va a ser lento. Ruta completa en <a href="#moverse">Cómo moverse</a>.', q:'Estadio Nacional de Chile Ñuñoa'},
+        {time:'20:00–23:00', place:'Concierto', meta:['🔋 lleva batería externa'], why:''},
+        {time:'Al salir', place:'Regreso en Uber o Cabify', meta:['🚇 la estación podría estar cerrada'], why:'Acuerden antes el punto de recogida lejos del tumulto: a la salida casi no va a haber señal para escribirse.'}
+      ]
+    },
+    dad:{
+      label:'👨 Papá', sub:'Centro histórico por su cuenta',
+      legs:[
+        {time:'09:30', place:'Salida a La Moneda', meta:[chip('L1','Manquehue → La Moneda, directo')], why:''},
+        {time:'', place:'Palacio de La Moneda y Plaza de la Constitución', meta:['⏱️ 45 min'], why:'El corazón político de Chile. Debajo está el Centro Cultural La Moneda, con exposiciones y baños limpios.', q:'Palacio de La Moneda'},
+        {time:'', place:'Plaza de Armas, Catedral y Correo Central', meta:['🚶 15 min','⏱️ 45–60 min'], why:'El núcleo fundacional de Santiago.', q:'Plaza de Armas Santiago'},
+        {time:'', place:'Museo Chileno de Arte Precolombino', opt:true, meta:['🚶 2 min de Plaza de Armas','⏱️ 1 h','cierra lunes'], why:'Uno de los mejores museos de la ciudad: textiles, cerámica y piedra de todo el continente, en una sala pequeña que se recorre sin cansarse.', q:'Museo Chileno de Arte Precolombino'},
+        {time:'Almuerzo', place:'Mercado Central', meta:['🚶 8–10 min','💰 $12.000–18.000 CLP'], why:'Mercado de 1872 con mariscos frescos. Aquí se siente Chile de verdad.', q:'Mercado Central Santiago'},
+        {time:'', place:'La Vega Central', meta:['🚶 5 min cruzando el río','⏱️ 45–60 min'], why:'Mercado popular que casi todos los turistas se saltan; más auténtico que el Central. Ahí se consigue mote con huesillo.', q:'La Vega Central'},
+        {time:'', place:'Parque Forestal y Museo de Bellas Artes', meta:['🚶 15–20 min','⏱️ 45 min','💰 museo gratis'], why:'Caminata de cierre junto al río Mapocho; el edificio del museo vale la pena aunque sea solo el hall.', q:'Museo Nacional de Bellas Artes Santiago'},
+        {time:'15:30–16:00', place:'Regreso al hotel', meta:[chip('L1','→ Manquehue, directo')], why:'Lejos de Ñuñoa toda la noche: la zona del estadio va a estar colapsada.'}
+      ]
+    },
+    note:'<strong>Por qué funciona:</strong> el día de papá se resuelve entero en la Línea 1, en zonas seguras, de día, y termina antes de anochecer.'
+  },
+  {
+    id:'d15', num:15, wd:'Jueves', title:'Centro, Calle Nueva York y Cerro San Cristóbal', energy:7, icon:'🏙️',
+    tags:['Ciudad','Miradores','Padre-hija'],
+    legs:[
+      {time:'09:30', place:'Salida hacia el centro', meta:[chip('L1','Manquehue → La Moneda')], why:''},
+      {time:'10:00', place:'Cambio de guardia en La Moneda', opt:true, meta:['⏱️ 30–40 min','💰 gratis'], why:'En octubre se hace en días impares, y el 15 lo es. Confirmen el horario la noche anterior en las redes de Carabineros o de la Presidencia; si no hay, pasen directo a Nueva York.', q:'Plaza de la Constitución Santiago'},
+      {time:'', place:'Calle Nueva York', meta:['🚶 5 min','⏱️ 20–30 min'], why:'Una de las calles más angostas y curiosas de Santiago, en pleno barrio bancario histórico. Parada rápida para fotos. ¡Ya la tachas de tu lista!', q:'Calle Nueva York Santiago'},
+      {time:'', place:'Cerro Santa Lucía', meta:['🚶 15–18 min','⏱️ 1–1.5 h','💰 gratis'], why:'Miradores, escaleras y fuentes en pleno centro.', q:'Cerro Santa Lucía'},
+      {time:'', place:'Barrio Lastarria', meta:['🚶 5–8 min','⏱️ 1.5–2 h con almuerzo'], why:'La mejor oferta de cafés y restaurantes de autor del centro. Al lado está el GAM, con exposiciones gratis.', q:'Barrio Lastarria'},
+      {time:'', place:'Barrio Bellavista', meta:['🚶 10–12 min','⏱️ 1–1.5 h'], why:'Murales y casas de colores camino al cerro. Ahí está La Chascona, casa de Neruda (con reserva).', q:'La Chascona'},
+      {time:'', place:'Cerro San Cristóbal: funicular y teleférico', meta:['🚶 entrada por Pío Nono','⏱️ 2.5–3 h','💰 ~$8.000 CLP p/p'], why:'La mejor vista de Santiago con la cordillera de fondo. Suban en funicular y bajen en teleférico para verlo desde dos ángulos.', q:'Funicular Cerro San Cristóbal Pío Nono'},
+      {time:'Atardecer', place:'Regreso al hotel', meta:['🚡 el teleférico baja en Oasis', chip('L1','Pedro de Valdivia → Manquehue')], why:''}
+    ]
+  },
+  {
+    id:'d16', num:16, wd:'Viernes', title:'Valparaíso, Viña, Casablanca y Reñaca', energy:7, icon:'🌊',
+    tags:['Costa','Tour pagado'],
+    legs:[
+      {time:'06:30', place:'Pickup del tour', meta:['💰 ya pagado','🧥 en la costa sopla viento'], why:'Día completo de costa: cerros de Valparaíso, viñedos de Casablanca y playa. Los cerros de Valpo son empinados; lleven zapato cómodo.'},
+      {time:'Noche', place:'Cena ligera cerca del hotel', meta:[], why:''}
+    ]
+  },
+  {
+    id:'d17', num:17, wd:'Sábado', title:'Barrio Italia, outlet y despedida en las alturas', energy:6, icon:'🛍️',
+    tags:['Compras','Padre-hija'],
+    legs:[
+      {time:'10:30', place:'Salida a Barrio Italia', meta:[chip('L1','Manquehue → Tobalaba'), chip('L5','→ Santa Isabel')], why:'Es el día más relajado de la semana.'},
+      {time:'', place:'Barrio Italia', meta:['⏱️ 2.5–3 h con almuerzo'], why:'Anticuarios, diseño y moda independiente: algo distinto a las marcas que ya conocen.', q:'Barrio Italia Santiago'},
+      {time:'', place:'Patio Outlet La Florida', meta:[chip('L5','→ Tobalaba'), chip('L4','→ Rojas Magallanes'),'⏱️ 2–2.5 h'], why:'El outlet más accesible en Metro: 30–70 % de descuento en ropa y calzado.', q:'Patio Outlet La Florida'},
+      {time:'~19:30', place:'Sky Costanera al atardecer', opt:true, meta:[chip('L4','→ Tobalaba'),'💰 ~$23.000 CLP p/p','🕗 abre hasta las 22:00'], why:'El mirador más alto de Sudamérica, piso 61, en el mismo edificio que la cena. El sol se pone cerca de las 20:10: ven la ciudad de día y de noche en una sola subida. Compren entrada en línea para ese horario.', q:'Sky Costanera'},
+      {time:'Noche', place:'Cena de despedida', meta:['📍 Costanera Center o Lastarria'], why:'Al regresar, dejen las maletas listas: mañana salen de madrugada.'}
+    ]
+  },
+  {
+    id:'d18', num:18, wd:'Domingo', title:'Regreso', energy:2, icon:'✈️',
+    tags:['Viaje'],
+    legs:[
+      {time:'05:30–06:00', place:'Salida del hotel al aeropuerto', meta:['✈️ vuelo 08:30'], why:'Pidan el traslado desde la noche anterior. El Metro aún no abre a esa hora en domingo.', q:'Aeropuerto Internacional Arturo Merino Benítez'}
+    ]
+  }
+];
+
+// ---------- fechas (zona horaria de Santiago) ----------
+function santiagoToday(){
+  try{
+    return new Intl.DateTimeFormat('en-CA', {timeZone:'America/Santiago', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date());
+  }catch(e){ return new Date().toISOString().slice(0,10); }
+}
+const TODAY = santiagoToday();                        // "2026-10-11"
+const dateOf = d => `2026-10-${String(d.num).padStart(2,'0')}`;
+const todayDay = days.find(d => dateOf(d) === TODAY);
+const beforeTrip = TODAY < '2026-10-12';
+const afterTrip = TODAY > '2026-10-18';
+
+// ---------- estado ----------
+let done = new Set(store.get('mp-done', []));
+let who = store.get('mp-who', 'her');
+const hashDay = days.find(d => location.hash === '#' + d.id);
+let current = days.indexOf(hashDay || todayDay || days[0]);
+
+function legsOf(d){
+  if(!d.split) return d.legs.map((l,i)=>({...l, key:`${d.id}-${i}`}));
+  const part = d[who];
+  return part.legs.map((l,i)=>({...l, key:`${d.id}-${who}-${i}`}));
+}
+
+// ---------- línea de estaciones ----------
+const lineEl = document.getElementById('line');
+function renderLine(){
+  lineEl.innerHTML = days.map((d,i)=>{
+    const cls = ['stop', d.split?'split-day':'', dateOf(d) < TODAY ? 'past':'', d === todayDay ? 'today':''].join(' ');
+    return `<button class="${cls}" role="tab" aria-selected="${i===current}" aria-label="${d.wd} ${d.num}: ${d.title}" data-i="${i}">
+      <span class="wd">${d === todayDay ? 'Hoy' : d.wd.slice(0,3)}</span>
+      <span class="dot"></span>
+      <span class="n">${d.num}</span>
+      <span class="ic" aria-hidden="true">${d.icon}</span>
+    </button>`;
+  }).join('');
+  // la línea se "llena" hasta el día seleccionado
+  lineEl.style.setProperty('--prog', (current/(days.length-1)*100) + '%');
+}
+lineEl.addEventListener('click', e=>{
+  const b = e.target.closest('.stop'); if(!b) return;
+  go(+b.dataset.i, true);
+});
+lineEl.addEventListener('keydown', e=>{
+  if(e.key === 'ArrowRight'){ go(Math.min(current+1, days.length-1)); lineEl.children[current].focus(); }
+  if(e.key === 'ArrowLeft'){ go(Math.max(current-1, 0)); lineEl.children[current].focus(); }
+});
+
+// ---------- panel del día ----------
+const panel = document.getElementById('dayPanel');
+function legHTML(l, isNext){
+  const meta = l.meta && l.meta.length ? `<div class="meta">${l.meta.map(m=>`<span>${m}</span>`).join('')}</div>` : '';
+  const isDone = done.has(l.key);
+  return `<li class="leg${isDone?' done':''}${isNext?' is-next':''}">
+    <button class="check" data-key="${l.key}" aria-pressed="${isDone}" aria-label="Marcar “${l.place.replace(/"/g,'')}” como hecho">✓</button>
+    <div class="leg-card">
+      ${l.time ? `<div class="time">${l.time}</div>` : ''}
+      <div class="place">${l.place}${l.opt?'<span class="opt">opcional</span>':''}</div>
+      ${meta}
+      ${l.why ? `<div class="why">${l.why}</div>` : ''}
+      ${l.q ? `<a class="maps" href="${maps(l.q)}" target="_blank" rel="noopener">📍 Ver en Maps</a>` : ''}
+    </div>
+  </li>`;
+}
+function nextKey(d){ const l = legsOf(d).find(l=>!done.has(l.key)); return l ? l.key : null; }
+
+function renderDay(dir){
+  const d = days[current];
+  const legs = legsOf(d);
+  const nk = d === todayDay ? nextKey(d) : null;
+  const doneCount = legs.filter(l=>done.has(l.key)).length;
+  const segs = Array.from({length:10},(_,i)=>`<i class="${i<d.energy?'on':''}"></i>`).join('');
+  const prev = days[current-1], next = days[current+1];
+
+  panel.innerHTML = `
+    <div class="day-head">
+      <span class="big">${d.num}</span>
+      <span class="wd">${d.wd}${d.wdNote?` · ${d.wdNote}`:''}</span>
+      <h2>${d.title}</h2>
+    </div>
+    <div class="day-sub">
+      ${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}
+      <span class="energy" title="Qué tan cansado es el día">Cansancio <span class="seg" aria-label="${d.energy} de 10">${segs}</span></span>
+    </div>
+    ${d.split ? `
+      <div class="who-switch" role="group" aria-label="Ver plan de">
+        <button class="her" aria-pressed="${who==='her'}" data-who="her">${d.her.label}</button>
+        <button class="dad" aria-pressed="${who==='dad'}" data-who="dad">${d.dad.label}</button>
+      </div>
+      <p class="who-sub">${d[who].sub}</p>` : ''}
+    <p class="day-progress">${doneCount} de ${legs.length} paradas hechas</p>
+    <ol class="legs">${legs.map(l=>legHTML(l, l.key===nk)).join('')}</ol>
+    ${d.note ? `<div class="callout">${d.note}</div>` : ''}
+    <div class="day-pager" style="margin-top:18px;">
+      <button data-go="${current-1}" ${prev?'':'disabled'}><small>‹ Anterior</small><span>${prev?`${prev.num} · ${prev.title}`:''}</span></button>
+      <button data-go="${current+1}" ${next?'':'disabled'}><small>Siguiente ›</small><span>${next?`${next.num} · ${next.title}`:''}</span></button>
+    </div>`;
+  if(dir){
+    panel.classList.remove('anim-next','anim-prev'); void panel.offsetWidth;
+    panel.classList.add(dir > 0 ? 'anim-next' : 'anim-prev');
+  }
+}
+panel.addEventListener('click', e=>{
+  const c = e.target.closest('.check');
+  if(c){
+    const k = c.dataset.key;
+    done.has(k) ? done.delete(k) : done.add(k);
+    store.set('mp-done', [...done]);
+    renderDay(); renderHoy();
+    return;
+  }
+  const w = e.target.closest('[data-who]');
+  if(w){ who = w.dataset.who; store.set('mp-who', who); renderDay(); renderHoy(); return; }
+  const g = e.target.closest('[data-go]');
+  if(g && !g.disabled){ go(+g.dataset.go, true); }
+});
+
+function go(i, scroll){
+  if(i < 0 || i >= days.length || i === current) { if(scroll) scrollToPanel(); return; }
+  const dir = i > current ? 1 : -1;
+  current = i;
+  renderLine(); renderDay(dir);
+  history.replaceState(null, '', '#' + days[i].id);
+  if(scroll) scrollToPanel();
+}
+function scrollToPanel(){
+  const top = panel.getBoundingClientRect().top + scrollY - (document.querySelector('.line-shell').offsetHeight + (innerWidth >= 900 ? 58 : 0) + 12);
+  if(scrollY > top + 10 || panel.getBoundingClientRect().top > innerHeight * 0.6) scrollTo({top, behavior:'smooth'});
+}
+
+// deslizar para cambiar de día
+let sx = null, sy = null;
+panel.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+panel.addEventListener('touchend', e=>{
+  if(sx === null) return;
+  const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+  if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(current + (dx < 0 ? 1 : -1));
+  sx = null;
+}, {passive:true});
+
+// ---------- tarjeta "Hoy" y cuenta regresiva ----------
+const hoyEl = document.getElementById('hoy');
+const cdEl = document.getElementById('countdown');
+function renderHoy(){
+  if(beforeTrip){
+    const n = Math.round((new Date('2026-10-12T12:00:00') - new Date(TODAY + 'T12:00:00')) / 864e5);
+    cdEl.innerHTML = n === 1 ? `<b>Mañana</b> empieza el viaje` : `Faltan <b>${n}</b> días`;
+    const pend = CHECK.filter((_,i)=>!checks[i]).length;
+    hoyEl.innerHTML = `
+      <span class="hoy-label">Antes de salir</span>
+      <h2>${pend ? `Les quedan ${pend} pendientes por palomear` : 'Todo listo para el viaje 🎉'}</h2>
+      <div class="next"><small>Lo primero al aterrizar</small><strong>Lunes 12, 06:55 · Aeropuerto → hotel</strong></div>
+      <div class="actions">
+        <a class="pill solid" href="#util">Ver pendientes</a>
+        <button class="pill" data-sos>🆘 Guardar teléfono del hotel</button>
+      </div>`;
+    return;
+  }
+  if(afterTrip){
+    cdEl.innerHTML = `Viaje terminado. ¡Bienvenidos de vuelta!`;
+    hoyEl.style.display = 'none';
+    return;
+  }
+  const d = todayDay;
+  cdEl.innerHTML = `Día <b>${days.indexOf(d)+1}</b> de 7`;
+  const legs = legsOf(d);
+  const nl = legs.find(l=>!done.has(l.key));
+  hoyEl.innerHTML = `
+    <span class="hoy-label">Hoy, ${d.wd.toLowerCase()} ${d.num}${d.split ? ` · ${d[who].label}` : ''}</span>
+    <h2>${d.title}</h2>
+    ${nl ? `<div class="next"><small>Siguiente parada${nl.time?` · ${nl.time}`:''}</small><strong>${nl.place}</strong></div>`
+         : `<div class="next"><strong>Día completo. ¡A descansar! 🌙</strong></div>`}
+    <div class="actions">
+      ${nl && nl.q ? `<a class="pill solid" href="${maps(nl.q)}" target="_blank" rel="noopener">📍 Cómo llegar</a>` : ''}
+      <button class="pill" data-go-today>Ver el día completo</button>
+    </div>`;
+}
+hoyEl.addEventListener('click', e=>{
+  if(e.target.closest('[data-go-today]')) go(days.indexOf(todayDay), true);
+});
+
+// ---------- ruta al estadio ----------
+document.getElementById('routeStadium').innerHTML = `
+  <div class="step">${chip('L1','Manquehue → Los Leones')}<small>4 estaciones · ~10 min</small></div>
+  <div class="step">${chip('L6','Los Leones → Estadio Nacional')}<small>directo · ~15 min</small></div>`;
+
+// ---------- si sobra tiempo ----------
+const EXTRA = [
+  {name:'Sky Costanera', what:'Mirador en el piso 61 del edificio más alto de Sudamérica. Ya está sugerido el 17 al atardecer.', where:chip('L1','Tobalaba'), tags:['lluvia','cerca']},
+  {name:'Parque Bicentenario', what:'Parque grande en Vitacura con laguna, cisnes de cuello negro y flamencos. Plan suave para una tarde libre.', where:'🚕 ~10 min en Uber desde el hotel', tags:['cansados','gratis','cerca']},
+  {name:'Museo de la Memoria y los Derechos Humanos', what:'Fuerte, pero indispensable para entender el Chile de 1973–1990. Calculen 1.5–2 h.', where:chip('L5','Quinta Normal') + ' · cierra lunes', tags:['lluvia','gratis']},
+  {name:'Museo Chileno de Arte Precolombino', what:'Arte de todo el continente americano en un edificio colonial frente a Plaza de Armas. Ya está como opcional el 14.', where:chip('L5','Plaza de Armas') + ' · cierra lunes', tags:['lluvia']},
+  {name:'Centro Cultural La Moneda', what:'Exposiciones bajo la plaza del palacio, con cafetería y tienda de diseño chileno.', where:chip('L1','La Moneda'), tags:['lluvia']},
+  {name:'Barrio Yungay y Barrio Brasil', what:'Casonas antiguas, murales y picadas de barrio. Para quien quiera ver el Santiago menos turístico.', where:chip('L5','Cumming'), tags:['gratis']},
+  {name:'Viña Cousiño Macul', what:'Viña histórica dentro de la ciudad, con tour y degustación. Medio día; reserven antes.', where:'🚕 ~25 min en Uber, en Peñalolén', tags:['lluvia']},
+  {name:'Café en Nueva Las Condes', what:'A pasos del hotel, para una mañana lenta después de un tour madrugador.', where:'🚶 5 min del hotel', tags:['cansados','cerca']}
+];
+const FILTERS = [['todo','Todo'],['cerca','Cerca del hotel'],['lluvia','Si llueve'],['cansados','Si están cansados'],['gratis','Gratis']];
+let filt = 'todo';
+function renderExtra(){
+  document.getElementById('extraFilters').innerHTML = FILTERS.map(([k,l])=>`<button data-f="${k}" aria-pressed="${filt===k}">${l}</button>`).join('');
+  document.getElementById('extraList').innerHTML = EXTRA.filter(x=>filt==='todo'||x.tags.includes(filt)).map(x=>`
+    <div class="item">
+      <h4>${x.name}</h4>
+      <p>${x.what}</p>
+      <div class="where">${x.where}</div>
+      <a class="link" style="margin-top:8px; font-size:0.85rem;" href="${maps(x.name)}" target="_blank" rel="noopener">📍 Ver en Maps</a>
+    </div>`).join('');
+}
+document.getElementById('extraFilters').addEventListener('click', e=>{
+  const b = e.target.closest('[data-f]'); if(!b) return;
+  filt = b.dataset.f; renderExtra();
+});
+
+// ---------- comer y comprar ----------
+const FOOD = [
+  ['Empanada de pino','Carne, cebolla, huevo y aceituna: la empanada chilena clásica.','En cualquier panadería; no hace falta planearla.'],
+  ['Completo','Hot dog chileno con palta, tomate y mayo (el “italiano”).','Fuente Alemana, junto a Metro Baquedano, es la más famosa.'],
+  ['Mote con huesillo','Bebida fría de durazno seco y trigo mote.','Puestos del centro y La Vega, de paso el 14.'],
+  ['Chorrillana','Montaña de papas fritas con carne, cebolla y huevo, para compartir.','Típica de Valparaíso: búsquenla el 16 si el tour da tiempo libre.'],
+  ['Pastel de choclo','Pastel de maíz dulce sobre carne, pollo y aceitunas, horneado en greda.','Cualquier restaurante de comida chilena.'],
+  ['Bar Nacional','Bar-restaurante centenario de cocina chilena tradicional.','Centro histórico, cerca de Plaza de Armas.'],
+  ['Cazuela de vacuno','Sopa de carne con zapallo, papa y choclo.','Para el regreso de la montaña el 13 o un día frío.'],
+  ['Lomo a lo pobre','Lomo con papas fritas, cebolla y huevo frito encima.','Cualquier noche que pidan algo contundente.'],
+  ['Sopaipillas','Tortitas fritas de zapallo, con pebre o con chancaca.','Carritos callejeros, sobre todo por la tarde.'],
+  ['Helado en Emporio La Rosa','Heladería artesanal con sabores raros: rosa, lúcuma, chirimoya.','Lastarria y Providencia, de paso el 15.']
+];
+document.getElementById('foodList').innerHTML = FOOD.map(([n,w,d])=>`
+  <div class="item"><h4>${n}</h4><p>${w}</p><div class="where">${d}</div></div>`).join('');
+
+const SHOPS = [
+  {n:'Patio Outlet La Florida', p:'30–70 % de descuento', v:'~80 tiendas de ropa, calzado y accesorios.', how:chip('L1','→ Tobalaba') + chip('L4','→ Rojas Magallanes'), b:['ok','El que más conviene']},
+  {n:'Pueblito Los Dominicos', p:'Precio de mercado artesanal', v:'Lapislázuli, lana, cobre y cerámica chilena.', how:chip('L1','Los Dominicos, 1 estación'), b:['ok','Para recuerdos']},
+  {n:'Barrio Italia', p:'Variable', v:'Moda independiente, vintage y accesorios de diseño.', how:chip('L5','Santa Isabel'), b:null},
+  {n:'Arauco Premium Outlet Buenaventura', p:'20–30 % menos que en Costanera', v:'Nike, Adidas, Levi’s, Puma, Columbia.', how:'🚕 35–45 min en Uber; sin ruta práctica en Metro', b:['cob','Opcional']},
+  {n:'Parque Arauco / Costanera Center', p:'Precio completo', v:'Marcas internacionales sin descuento.', how:'A pasos del hotel', b:null}
+];
+document.getElementById('shopList').innerHTML = SHOPS.map(s=>`
+  <div class="item">
+    ${s.b ? `<span class="badge ${s.b[0]}">${s.b[1]}</span>` : ''}
+    <div class="row"><h4>${s.n}</h4><span style="font-weight:700; font-size:0.88rem;">${s.p}</span></div>
+    <p>${s.v}</p>
+    <div class="where">${s.how}</div>
+  </div>`).join('');
+
+// ---------- pendientes ----------
+const CHECK = [
+  'Adaptador de enchufe tipo C/L',
+  'Roaming o eSIM activados',
+  'Chamarra, gorro, lentes y bloqueador para El Yeso',
+  'Boletos del concierto descargados en el celular',
+  'Batería externa cargada para la noche del 14',
+  'Punto de recogida después del concierto acordado',
+  'Teléfono del hotel guardado (en el botón SOS)',
+  'Tarjeta bip! para cada uno (se compra en el Metro)',
+  'Entradas de Sky Costanera para el 17 (opcional)',
+  'Traslado al aeropuerto del 18 reservado'
+];
+let checks = store.get('mp-check', CHECK.map(()=>false));
+if(checks.length !== CHECK.length) checks = CHECK.map((_,i)=>!!checks[i]);
+const clEl = document.getElementById('checklist');
+function renderChecklist(){
+  clEl.innerHTML = CHECK.map((c,i)=>`<li><label><input type="checkbox" data-c="${i}" ${checks[i]?'checked':''}><span>${c}</span></label></li>`).join('');
+  document.getElementById('clCount').textContent = `${checks.filter(Boolean).length}/${CHECK.length}`;
+}
+clEl.addEventListener('change', e=>{
+  const i = e.target.dataset.c; if(i === undefined) return;
+  checks[+i] = e.target.checked; store.set('mp-check', checks);
+  document.getElementById('clCount').textContent = `${checks.filter(Boolean).length}/${CHECK.length}`;
+  renderHoy();
+});
+
+// ---------- conversor ----------
+const clpIn = document.getElementById('clp'), mxnIn = document.getElementById('mxn'), rateIn = document.getElementById('rate');
+rateIn.value = store.get('mp-rate', '18');
+const num = s => parseFloat(String(s).replace(/\./g,'').replace(',', '.')) || 0;
+const fmt = (n, dec) => n.toLocaleString('es-CL', {maximumFractionDigits:dec});
+const rate = () => num(rateIn.value) / 1000;
+function fromCLP(){ mxnIn.value = fmt(num(clpIn.value) * rate(), 0); }
+function fromMXN(){ const r = rate(); clpIn.value = r ? fmt(num(mxnIn.value) / r, 0) : ''; }
+clpIn.addEventListener('input', fromCLP);
+mxnIn.addEventListener('input', fromMXN);
+rateIn.addEventListener('input', ()=>{ store.set('mp-rate', rateIn.value); fromCLP(); });
+document.getElementById('quick').innerHTML = [895, 5000, 15000, 23000, 50000].map(v=>`<button data-v="${v}">$${fmt(v,0)}</button>`).join('');
+document.getElementById('quick').addEventListener('click', e=>{
+  const b = e.target.closest('[data-v]'); if(!b) return;
+  clpIn.value = fmt(+b.dataset.v, 0); fromCLP();
+});
+fromCLP();
+
+// ---------- SOS ----------
+const sos = document.getElementById('sos');
+const telArea = document.getElementById('telArea');
+function renderTel(){
+  const tel = store.get('mp-tel', '');
+  telArea.innerHTML = tel
+    ? `<a class="pill solid" href="tel:${tel.replace(/[^\d+]/g,'')}">📞 Llamar al hotel · ${tel}</a> <button class="pill" data-edit-tel>Cambiar</button>`
+    : `<div class="tel-edit"><input id="telIn" type="tel" placeholder="Escribe el teléfono del hotel" aria-label="Teléfono del hotel"><button class="pill solid" data-save-tel>Guardar</button></div>`;
+}
+telArea.addEventListener('click', e=>{
+  if(e.target.closest('[data-save-tel]')){ const v = document.getElementById('telIn').value.trim(); if(v){ store.set('mp-tel', v); renderTel(); } }
+  if(e.target.closest('[data-edit-tel]')){ store.set('mp-tel', ''); renderTel(); }
+});
+document.addEventListener('click', e=>{
+  if(e.target.closest('[data-sos]')){ renderTel(); sos.showModal(); }
+  if(e.target.closest('[data-close]')) sos.close();
+});
+sos.addEventListener('click', e=>{ if(e.target === sos) sos.close(); });
+
+// ---------- tema ----------
+const savedTheme = store.get('mp-theme', null);
+if(savedTheme) document.documentElement.dataset.theme = savedTheme;
+document.querySelectorAll('[data-theme-toggle]').forEach(b=>b.addEventListener('click', ()=>{
+  const isDark = document.documentElement.dataset.theme
+    ? document.documentElement.dataset.theme === 'dark'
+    : matchMedia('(prefers-color-scheme: dark)').matches;
+  const t = isDark ? 'light' : 'dark';
+  document.documentElement.dataset.theme = t; store.set('mp-theme', t);
+}));
+
+// ---------- mapa esquemático ----------
+const C = LINE_COLORS;
+document.getElementById('schematic').innerHTML = `
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="Schibsted Grotesk, sans-serif" role="img" aria-label="Esquema de las líneas 1, 4, 5 y 6 del Metro con las estaciones del viaje">
+  <line x1="60" y1="120" x2="830" y2="120" stroke="${C.L1}" stroke-width="7" stroke-linecap="round"/>
+  <line x1="330" y1="120" x2="330" y2="300" stroke="${C.L4}" stroke-width="7" stroke-linecap="round"/>
+  <line x1="560" y1="120" x2="560" y2="300" stroke="${C.L5}" stroke-width="7" stroke-linecap="round"/>
+  <line x1="470" y1="120" x2="640" y2="260" stroke="${C.L6}" stroke-width="7" stroke-linecap="round"/>
+  <g font-size="13" fill="var(--ink)">
+    <circle cx="100" cy="120" r="7" fill="var(--card)" stroke="${C.L1}" stroke-width="4"/>
+    <text x="100" y="98" text-anchor="middle">Los Dominicos</text>
+    <text x="100" y="146" text-anchor="middle" font-size="11" fill="var(--ink-soft)">recuerdos</text>
+    <circle cx="200" cy="120" r="11" fill="${C.L1}" stroke="var(--card)" stroke-width="3"/>
+    <text x="200" y="96" text-anchor="middle" font-weight="800">Manquehue</text>
+    <text x="200" y="148" text-anchor="middle" font-size="11" font-weight="700" fill="var(--jac-deep)">★ hotel</text>
+    <circle cx="330" cy="120" r="7" fill="var(--card)" stroke="${C.L1}" stroke-width="4"/>
+    <text x="330" y="98" text-anchor="middle">Tobalaba</text>
+    <text x="330" y="146" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Sky Costanera</text>
+    <circle cx="470" cy="120" r="7" fill="var(--card)" stroke="${C.L1}" stroke-width="4"/>
+    <text x="470" y="98" text-anchor="middle">Los Leones</text>
+    <circle cx="560" cy="120" r="7" fill="var(--card)" stroke="${C.L1}" stroke-width="4"/>
+    <text x="560" y="98" text-anchor="middle">Baquedano</text>
+    <text x="586" y="146" text-anchor="start" font-size="11" fill="var(--ink-soft)">San Cristóbal</text>
+    <circle cx="700" cy="120" r="7" fill="var(--card)" stroke="${C.L1}" stroke-width="4"/>
+    <text x="700" y="98" text-anchor="middle">Univ. de Chile</text>
+    <circle cx="800" cy="120" r="7" fill="var(--card)" stroke="${C.L1}" stroke-width="4"/>
+    <text x="800" y="98" text-anchor="middle">La Moneda</text>
+    <text x="800" y="146" text-anchor="middle" font-size="11" fill="var(--ink-soft)">centro, Nueva York</text>
+  </g>
+  <g font-size="13" fill="var(--ink)">
+    <circle cx="330" cy="300" r="10" fill="${C.L4}" stroke="var(--card)" stroke-width="3"/>
+    <text x="330" y="326" text-anchor="middle">Rojas Magallanes</text>
+    <text x="330" y="343" text-anchor="middle" font-size="11" fill="var(--ink-soft)">outlet La Florida</text>
+    <circle cx="560" cy="300" r="10" fill="${C.L5}" stroke="var(--card)" stroke-width="3"/>
+    <text x="560" y="326" text-anchor="middle">Santa Isabel</text>
+    <text x="560" y="343" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Barrio Italia</text>
+    <circle cx="640" cy="260" r="10" fill="${C.L6}" stroke="var(--card)" stroke-width="3"/>
+    <text x="662" y="256" text-anchor="start">Estadio Nacional</text>
+    <text x="662" y="273" text-anchor="start" font-size="11" fill="var(--ink-soft)">concierto</text>
+  </g>
+  <g font-size="12" fill="var(--ink)">
+    <rect x="60" y="372" width="18" height="7" rx="2" fill="${C.L1}"/><text x="84" y="380">Línea 1</text>
+    <rect x="160" y="372" width="18" height="7" rx="2" fill="${C.L4}"/><text x="184" y="380">Línea 4</text>
+    <rect x="260" y="372" width="18" height="7" rx="2" fill="${C.L5}"/><text x="284" y="380">Línea 5</text>
+    <rect x="360" y="372" width="18" height="7" rx="2" fill="${C.L6}"/><text x="384" y="380">Línea 6</text>
+  </g>
+</svg>`;
+
+// ---------- navegación: sección activa ----------
+const navLinks = [...document.querySelectorAll('[data-sec]')];
+const secIds = [...new Set(navLinks.map(a=>a.dataset.sec))];
+const spy = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting) navLinks.forEach(a=>a.classList.toggle('active', a.dataset.sec === en.target.id));
+  });
+}, {rootMargin:'-30% 0px -60% 0px'});
+secIds.forEach(id=>{ const el = document.getElementById(id); if(el) spy.observe(el); });
+
+// ---------- arranque ----------
+renderChecklist();
+renderLine();
+renderDay();
+renderHoy();
+renderExtra();
+// si llegan con un enlace a una sección, re-ubicar ya que el contenido se generó
+const target = location.hash && !hashDay && document.querySelector(location.hash);
+if(target) addEventListener('load', ()=>target.scrollIntoView({behavior:'instant'}));
+</script>
+</body>
+</html>
