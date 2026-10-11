@@ -389,7 +389,7 @@
       <a href="#dias" data-sec="dias">Días</a>
       <a href="#moverse" data-sec="moverse">Moverse</a>
       <a href="#extra" data-sec="extra">Si sobra tiempo</a>
-      <a href="#comer" data-sec="comer">Comer y comprar</a>
+      <a href="#comer" data-sec="comer">Comer, bares y compras</a>
       <a href="#util" data-sec="util">Útil</a>
       <a href="#presupuesto" data-sec="presupuesto">Presupuesto</a>
     </nav>
@@ -489,6 +489,10 @@
   </div>
   <div class="list" id="foodList"></div>
 
+  <h3 class="sub-h" id="bares">🍸 Para tomar algo</h3>
+  <p class="note" style="margin:0 0 12px;">Bares que quedan sobre su ruta. Todos sirven comida y bebidas sin alcohol. En Chile se puede tomar desde los 18 años.</p>
+  <div class="list" id="barList"></div>
+
   <h3 class="sub-h" id="compras">🛍️ Dónde comprar</h3>
   <p class="note" style="margin:0 0 12px;">Ajustado a lo que de verdad van a comprar: ropa, accesorios y recuerdos.</p>
   <div class="list" id="shopList"></div>
@@ -539,9 +543,9 @@
     <thead><tr><th>Rubro</th><th>Por persona (CLP)</th><th>Ambos (CLP)</th><th>Ambos (MXN aprox.)</th></tr></thead>
     <tbody>
       <tr><td>Transporte</td><td>$35.000–45.000</td><td>$70.000–90.000</td><td>$1.260–1.620</td></tr>
-      <tr><td>Comida</td><td>$150.000–210.000</td><td>$300.000–420.000</td><td>$5.400–7.560</td></tr>
+      <tr><td>Comida y bares</td><td>$170.000–240.000</td><td>$340.000–480.000</td><td>$6.120–8.640</td></tr>
       <tr><td>Entradas (incl. Sky Costanera y funicular)</td><td>$40.000–50.000</td><td>$80.000–100.000</td><td>$1.440–1.800</td></tr>
-      <tr class="total"><td>Subtotal sin compras</td><td>$225.000–305.000</td><td>$450.000–610.000</td><td>$8.100–10.980</td></tr>
+      <tr class="total"><td>Subtotal sin compras</td><td>$245.000–335.000</td><td>$490.000–670.000</td><td>$8.820–12.060</td></tr>
     </tbody>
   </table></div>
   <p class="note">Tipo de cambio usado: 1.000 CLP ≈ 18 MXN. Compras: monto abierto.</p>
@@ -611,8 +615,10 @@ const days = [
       {time:'Media mañana', place:'Dejar maletas y desayunar tranquilos', meta:['📍 Apumanque o un café de Nueva Las Condes'], why:'El check-in es a las 15:00; el hotel guarda el equipaje mientras tanto.', q:'Apumanque'},
       {time:'Mediodía', place:'Parque Arauco y Parque Araucano', meta:['🚶 10–12 min a pie','⏱️ 1.5–2 h'], why:'Mall y parque contiguo para caminar sin exigirse después del vuelo.', q:'Parque Araucano'},
       {time:'Primera tarde', place:'Pueblito Los Dominicos', meta:[chip('L1','Manquehue → Los Dominicos, 1 estación'),'⏱️ 1–1.5 h'], why:'El mercado artesanal clásico: lapislázuli, lana, cobre, cerámica. Aquí sí conviene comprar recuerdos.', q:'Pueblito Los Dominicos'},
-      {time:'15:00', place:'Check-in y siesta corta', meta:[], why:'Mañana el tour pasa por ustedes a las 5:30.'},
-      {time:'Noche', place:'Cena cerca del hotel y a dormir temprano', meta:[], why:'Dejen lista la ropa de abrigo para la montaña.'}
+      {time:'15:00', place:'Check-in y siesta corta', meta:['⏱️ 1.5 h'], why:'Recuperen el sueño del vuelo antes de salir otra vez.'},
+      {time:'17:30', place:'Parque Bicentenario', meta:['🚕 ~10 min en Uber','⏱️ 1–1.5 h','💰 gratis'], why:'Laguna con cisnes de cuello negro y flamencos, pasto para echarse y la cordillera al fondo. Paseo suave para estirar las piernas sin cansarse.', q:'Parque Bicentenario Vitacura'},
+      {time:'19:00', place:'Cena temprana en Mestizo', meta:['📍 dentro del mismo parque','💰 $$$'], why:'Cocina chilena con ventanales al parque. Es feriado: reserven. Si está lleno, en Nueva Costanera (a 5 min) hay muchas opciones.', q:'Restaurante Mestizo Parque Bicentenario'},
+      {time:'20:30', place:'De vuelta al hotel y a dormir', meta:[], why:'Mañana el tour pasa a las 5:30. Dejen lista la ropa de abrigo para la montaña.'}
     ]
   },
   {
@@ -620,7 +626,7 @@ const days = [
     tags:['Montaña','Tour pagado'],
     legs:[
       {time:'05:30', place:'Pickup del tour “Vista al Cajón del Maipo, Embalse del Yeso con brindis”', meta:['💰 ya pagado','🧥 capas, gorro, bloqueador, lentes'], why:'Día de cordillera y altura (~2.500 m). Coman algo antes de salir y tomen agua durante el día; el regreso es entre 17:00 y 19:00.'},
-      {time:'Noche', place:'Cena simple cerca del hotel', meta:[], why:'Si llegan muy cansados, pidan delivery.'}
+      {time:'Noche', place:'Cena simple cerca del hotel', meta:[], why:'Una cazuela de vacuno cae perfecto después del frío de la montaña. Si llegan muy cansados, pidan delivery.'}
     ]
   },
   {
@@ -644,25 +650,31 @@ const days = [
         {time:'', place:'Plaza de Armas, Catedral y Correo Central', meta:['🚶 15 min','⏱️ 45–60 min'], why:'El núcleo fundacional de Santiago.', q:'Plaza de Armas Santiago'},
         {time:'', place:'Museo Chileno de Arte Precolombino', opt:true, meta:['🚶 2 min de Plaza de Armas','⏱️ 1 h','cierra lunes'], why:'Uno de los mejores museos de la ciudad: textiles, cerámica y piedra de todo el continente, en una sala pequeña que se recorre sin cansarse.', q:'Museo Chileno de Arte Precolombino'},
         {time:'Almuerzo', place:'Mercado Central', meta:['🚶 8–10 min','💰 $12.000–18.000 CLP'], why:'Mercado de 1872 con mariscos frescos. Aquí se siente Chile de verdad.', q:'Mercado Central Santiago'},
+        {time:'', place:'Un terremoto en La Piojera', opt:true, meta:['🚶 3 min del Mercado Central','⏱️ 30–45 min'], why:'La fonda más famosa de Santiago, ruidosa y popular. El “terremoto” es vino pipeño con helado de piña: pega más fuerte de lo que parece, con uno basta. Mejor de día.', q:'La Piojera Aillavilú 1030'},
         {time:'', place:'La Vega Central', meta:['🚶 5 min cruzando el río','⏱️ 45–60 min'], why:'Mercado popular que casi todos los turistas se saltan; más auténtico que el Central. Ahí se consigue mote con huesillo.', q:'La Vega Central'},
-        {time:'', place:'Parque Forestal y Museo de Bellas Artes', meta:['🚶 15–20 min','⏱️ 45 min','💰 museo gratis'], why:'Caminata de cierre junto al río Mapocho; el edificio del museo vale la pena aunque sea solo el hall.', q:'Museo Nacional de Bellas Artes Santiago'},
-        {time:'15:30–16:00', place:'Regreso al hotel', meta:[chip('L1','→ Manquehue, directo')], why:'Lejos de Ñuñoa toda la noche: la zona del estadio va a estar colapsada.'}
+        {time:'~15:00', place:'Parque Forestal y Museo de Bellas Artes', meta:['🚶 15–20 min','⏱️ 45 min','💰 museo gratis'], why:'Caminata junto al río Mapocho; el edificio del museo vale la pena aunque sea solo el hall.', q:'Museo Nacional de Bellas Artes Santiago'},
+        {time:'16:00', place:'Museo de la Memoria y los Derechos Humanos', meta:[chip('L5','Bellas Artes → Quinta Normal, directo'),'⏱️ 1.5 h','💰 gratis'], why:'Fuerte, pero indispensable para entender el Chile de 1973–1990, y mejor verlo con calma, sin prisa. Cierra a las 18:00 y los lunes; confírmenlo antes de ir.', q:'Museo de la Memoria y los Derechos Humanos'},
+        {time:'18:00', place:'Metro hacia Providencia', meta:[chip('L5','Quinta Normal → Baquedano'), chip('L1','→ Manuel Montt'),'⏱️ ~25 min'], why:'Hora punta: el Metro va lleno, pero son pocas estaciones.'},
+        {time:'19:00', place:'Cena en Liguria Providencia', meta:['📍 Av. Providencia 1353','💰 $$'], why:'Bar-restaurante clásico de Santiago, con ambiente de bar de barrio de los de antes. Pide lo del pizarrón y un pisco sour. Zona concurrida y segura, sobre la misma Línea 1.', q:'Liguria Providencia 1353'},
+        {time:'21:00', place:'Al hotel, con el celular cargado', meta:[chip('L1','Manuel Montt → Manquehue, directo')], why:'La hija sale del concierto como a las 23:00: queda a la mano por si necesita ayuda para el regreso. Lejos de Ñuñoa toda la noche.'}
       ]
     },
-    note:'<strong>Por qué funciona:</strong> el día de papá se resuelve entero en la Línea 1, en zonas seguras, de día, y termina antes de anochecer.'
+    note:'<strong>Por qué funciona:</strong> el día de papá va solo por las Líneas 1 y 5, de día por el centro y de noche en Providencia, una zona concurrida. Nunca se acerca al estadio.'
   },
   {
-    id:'d15', num:15, wd:'Jueves', title:'Centro, Calle Nueva York y Cerro San Cristóbal', energy:7, icon:'🏙️',
-    tags:['Ciudad','Miradores','Padre-hija'],
+    id:'d15', num:15, wd:'Jueves', title:'Centro, Calle Nueva York y Cerro San Cristóbal', energy:8, icon:'🏙️',
+    tags:['Ciudad','Miradores','Noche de pisco','Padre-hija'],
     legs:[
       {time:'09:30', place:'Salida hacia el centro', meta:[chip('L1','Manquehue → La Moneda')], why:''},
       {time:'10:00', place:'Cambio de guardia en La Moneda', opt:true, meta:['⏱️ 30–40 min','💰 gratis'], why:'En octubre se hace en días impares, y el 15 lo es. Confirmen el horario la noche anterior en las redes de Carabineros o de la Presidencia; si no hay, pasen directo a Nueva York.', q:'Plaza de la Constitución Santiago'},
       {time:'', place:'Calle Nueva York', meta:['🚶 5 min','⏱️ 20–30 min'], why:'Una de las calles más angostas y curiosas de Santiago, en pleno barrio bancario histórico. Parada rápida para fotos. ¡Ya la tachas de tu lista!', q:'Calle Nueva York Santiago'},
       {time:'', place:'Cerro Santa Lucía', meta:['🚶 15–18 min','⏱️ 1–1.5 h','💰 gratis'], why:'Miradores, escaleras y fuentes en pleno centro.', q:'Cerro Santa Lucía'},
-      {time:'', place:'Barrio Lastarria', meta:['🚶 5–8 min','⏱️ 1.5–2 h con almuerzo'], why:'La mejor oferta de cafés y restaurantes de autor del centro. Al lado está el GAM, con exposiciones gratis.', q:'Barrio Lastarria'},
-      {time:'', place:'Barrio Bellavista', meta:['🚶 10–12 min','⏱️ 1–1.5 h'], why:'Murales y casas de colores camino al cerro. Ahí está La Chascona, casa de Neruda (con reserva).', q:'La Chascona'},
-      {time:'', place:'Cerro San Cristóbal: funicular y teleférico', meta:['🚶 entrada por Pío Nono','⏱️ 2.5–3 h','💰 ~$8.000 CLP p/p'], why:'La mejor vista de Santiago con la cordillera de fondo. Suban en funicular y bajen en teleférico para verlo desde dos ángulos.', q:'Funicular Cerro San Cristóbal Pío Nono'},
-      {time:'Atardecer', place:'Regreso al hotel', meta:['🚡 el teleférico baja en Oasis', chip('L1','Pedro de Valdivia → Manquehue')], why:''}
+      {time:'~13:00', place:'Almuerzo en Barrio Lastarria', meta:['🚶 5–8 min','⏱️ 1.5 h'], why:'La mejor oferta de cafés y restaurantes de autor del centro. Al lado está el GAM, con exposiciones gratis.', q:'Barrio Lastarria'},
+      {time:'14:30', place:'Barrio Bellavista', meta:['🚶 10–12 min','⏱️ 1 h'], why:'Murales y casas de colores camino al cerro. Ahí está La Chascona, casa de Neruda (con reserva).', q:'La Chascona'},
+      {time:'15:30', place:'Cerro San Cristóbal: funicular y teleférico', meta:['🚶 entrada por Pío Nono','⏱️ 2.5–3 h','💰 ~$8.000 CLP p/p'], why:'La mejor vista de Santiago con la cordillera de fondo. Desde 2026 hay un teleférico nuevo que sale de Pío Nono, además del funicular: suban en uno y bajen en el otro. <b>Ojo:</b> el último descenso es entre 18:45 y 19:45 según la fuente; confirmen la hora al subir y no se queden arriba esperando el atardecer.', q:'Funicular Cerro San Cristóbal Pío Nono'},
+      {time:'19:30', place:'Cena en Bellavista', meta:['📍 al pie del cerro','💰 $$'], why:'Dos opciones muy distintas: <b>Galindo</b> (Dardignac 098), picada clásica de toda la vida, con chorrillana y cerveza; o <b>Peumayén</b> (Constitución 136), cocina ancestral chilena en menú de degustación, con reserva.', q:'Galindo Dardignac 098'},
+      {time:'21:00', place:'Pisco sour en Lastarria', opt:true, meta:['🚶 10–12 min cruzando el río','⏱️ 1 h'], why:'<b>Chipe Libre</b> (Lastarria 282) es un bar de pisco con unas cien etiquetas. Al lado, <b>Bocanáriz</b> (Lastarria 276) sirve vinos chilenos por copa. Las dos opciones también tienen comida y bebidas sin alcohol.', q:'Chipe Libre Lastarria 282'},
+      {time:'22:00', place:'Regreso al hotel', meta:[chip('L1','Universidad Católica → Manquehue, directo')], why:'El Metro cierra cerca de las 23:00; si se les hace tarde, Uber.'}
     ]
   },
   {
@@ -674,14 +686,15 @@ const days = [
     ]
   },
   {
-    id:'d17', num:17, wd:'Sábado', title:'Barrio Italia, outlet y despedida en las alturas', energy:6, icon:'🛍️',
+    id:'d17', num:17, wd:'Sábado', title:'Barrio Italia, outlet y despedida en las alturas', energy:7, icon:'🛍️',
     tags:['Compras','Padre-hija'],
     legs:[
       {time:'10:30', place:'Salida a Barrio Italia', meta:[chip('L1','Manquehue → Tobalaba'), chip('L5','→ Santa Isabel')], why:'Es el día más relajado de la semana.'},
       {time:'', place:'Barrio Italia', meta:['⏱️ 2.5–3 h con almuerzo'], why:'Anticuarios, diseño y moda independiente: algo distinto a las marcas que ya conocen.', q:'Barrio Italia Santiago'},
       {time:'', place:'Patio Outlet La Florida', meta:[chip('L5','→ Tobalaba'), chip('L4','→ Rojas Magallanes'),'⏱️ 2–2.5 h'], why:'El outlet más accesible en Metro: 30–70 % de descuento en ropa y calzado.', q:'Patio Outlet La Florida'},
       {time:'~19:30', place:'Sky Costanera al atardecer', opt:true, meta:[chip('L4','→ Tobalaba'),'💰 ~$23.000 CLP p/p','🕗 abre hasta las 22:00'], why:'El mirador más alto de Sudamérica, piso 61, en el mismo edificio que la cena. El sol se pone cerca de las 20:10: ven la ciudad de día y de noche en una sola subida. Compren entrada en línea para ese horario.', q:'Sky Costanera'},
-      {time:'Noche', place:'Cena de despedida', meta:['📍 Costanera Center o Lastarria'], why:'Al regresar, dejen las maletas listas: mañana salen de madrugada.'}
+      {time:'21:00', place:'Cena de despedida en Liguria', meta:['📍 Luis Thayer Ojeda 019','🚶 5 min de Costanera Center','💰 $$'], why:'El clásico bar-restaurante santiaguino para cerrar el viaje: mesas apretadas, meseros de toda la vida, pizarrón de platos del día. Sábado: lleguen temprano o anótense en la lista de espera.', q:'Liguria Luis Thayer Ojeda 019'},
+      {time:'22:30', place:'Al hotel a armar maletas', meta:[chip('L1','Tobalaba → Manquehue, directo')], why:'Mañana salen de madrugada: dejen todo listo esta noche.'}
     ]
   },
   {
@@ -882,8 +895,8 @@ document.getElementById('routeStadium').innerHTML = `
 // ---------- si sobra tiempo ----------
 const EXTRA = [
   {name:'Sky Costanera', what:'Mirador en el piso 61 del edificio más alto de Sudamérica. Ya está sugerido el 17 al atardecer.', where:chip('L1','Tobalaba'), tags:['lluvia','cerca']},
-  {name:'Parque Bicentenario', what:'Parque grande en Vitacura con laguna, cisnes de cuello negro y flamencos. Plan suave para una tarde libre.', where:'🚕 ~10 min en Uber desde el hotel', tags:['cansados','gratis','cerca']},
-  {name:'Museo de la Memoria y los Derechos Humanos', what:'Fuerte, pero indispensable para entender el Chile de 1973–1990. Calculen 1.5–2 h.', where:chip('L5','Quinta Normal') + ' · cierra lunes', tags:['lluvia','gratis']},
+  {name:'Parque Bicentenario', what:'Parque grande en Vitacura con laguna, cisnes de cuello negro y flamencos. Ya está en la tarde del 12.', where:'🚕 ~10 min en Uber desde el hotel', tags:['cansados','gratis','cerca']},
+  {name:'Museo de la Memoria y los Derechos Humanos', what:'Fuerte, pero indispensable para entender el Chile de 1973–1990. Ya está en la tarde de papá el 14.', where:chip('L5','Quinta Normal') + ' · cierra lunes', tags:['lluvia','gratis']},
   {name:'Museo Chileno de Arte Precolombino', what:'Arte de todo el continente americano en un edificio colonial frente a Plaza de Armas. Ya está como opcional el 14.', where:chip('L5','Plaza de Armas') + ' · cierra lunes', tags:['lluvia']},
   {name:'Centro Cultural La Moneda', what:'Exposiciones bajo la plaza del palacio, con cafetería y tienda de diseño chileno.', where:chip('L1','La Moneda'), tags:['lluvia']},
   {name:'Barrio Yungay y Barrio Brasil', what:'Casonas antiguas, murales y picadas de barrio. Para quien quiera ver el Santiago menos turístico.', where:chip('L5','Cumming'), tags:['gratis']},
@@ -922,6 +935,23 @@ const FOOD = [
 ];
 document.getElementById('foodList').innerHTML = FOOD.map(([n,w,d])=>`
   <div class="item"><h4>${n}</h4><p>${w}</p><div class="where">${d}</div></div>`).join('');
+
+const BARS = [
+  {n:'Chipe Libre', what:'Bar de pisco con unas cien etiquetas chilenas y peruanas. El lugar para probar el pisco sour bien hecho.', where:'Lastarria 282 · el 15 en la noche', b:['jac','En el plan'], q:'Chipe Libre Lastarria 282'},
+  {n:'Bocanáriz', what:'Bar de vinos chilenos por copa, con vuelos de degustación por valle. Premiado por Wine Spectator.', where:'Lastarria 276 · el 15 en la noche', b:['jac','En el plan'], q:'Bocanariz Lastarria 276'},
+  {n:'Liguria', what:'El bar-restaurante clásico de Santiago: pizarrón de platos del día, meseros de toda la vida, ambiente bullicioso.', where:'Providencia 1353 (el 14, papá) · Luis Thayer Ojeda 019 (el 17) · también en Lastarria', b:['jac','En el plan'], q:'Liguria Luis Thayer Ojeda 019'},
+  {n:'La Piojera', what:'Fonda popular y ruidosa, famosa por el “terremoto” (pipeño con helado de piña). Mejor de día.', where:'Aillavilú 1030, junto al Mercado Central · opcional el 14', b:['cob','Opcional'], q:'La Piojera Aillavilú 1030'},
+  {n:'Rooftop de The Singular', what:'Terraza en la azotea de un hotel de Lastarria, con vista al Cerro Santa Lucía. Más tranquilo y elegante que los demás.', where:'Merced 294, Lastarria · alternativa para el 15', b:null, q:'The Singular Santiago Merced 294'},
+  {n:'Galindo', what:'Picada de Bellavista abierta desde los años cincuenta: chorrillana, cerveza de barril y ambiente de barrio.', where:'Dardignac 098, Bellavista · el 15 en la cena', b:['jac','En el plan'], q:'Galindo Dardignac 098'}
+];
+document.getElementById('barList').innerHTML = BARS.map(x=>`
+  <div class="item">
+    ${x.b ? `<span class="badge ${x.b[0]}">${x.b[1]}</span>` : ''}
+    <h4>${x.n}</h4>
+    <p>${x.what}</p>
+    <div class="where">${x.where}</div>
+    <a class="link" style="margin-top:8px; font-size:0.85rem;" href="${maps(x.q)}" target="_blank" rel="noopener">📍 Ver en Maps</a>
+  </div>`).join('');
 
 const SHOPS = [
   {n:'Patio Outlet La Florida', p:'30–70 % de descuento', v:'~80 tiendas de ropa, calzado y accesorios.', how:chip('L1','→ Tobalaba') + chip('L4','→ Rojas Magallanes'), b:['ok','El que más conviene']},
